@@ -12,7 +12,7 @@ let playBtn = document.getElementById("play-btn");
 let userInput = document.getElementById("user-input");
 let resultArea = document.getElementById("result-area");
 let resetBtn = document.getElementById("reset-btn")
-let chances = 10;
+let chances = 5;
 let gameOver = false;
 let chanceArea = document.getElementById("chance-area");
 let history = [];
@@ -25,13 +25,14 @@ function pickRandomNum() {
     computerNum = Math.floor(Math.random() * 10)+1;
     console.log("정답", computerNum);
 }
+chanceArea.textContent = `남은 기회: ${chances}번`;
 
 function play(){
    let userValue = userInput.value;
 
     // 유효성 검사
-    if(userValue < 1 || userValue > 100){
-        resultArea.textContent = "1과 100 사이 숫자를 입력해 주세요"
+    if(userValue < 1 || userValue > 10){
+        resultArea.textContent = "1과 10 사이 숫자를 입력해 주세요"
         return; // 종료
     }
 
