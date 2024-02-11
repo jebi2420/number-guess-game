@@ -15,6 +15,7 @@ let resetBtn = document.getElementById("reset-btn")
 let chances = 10;
 let gameOver = false;
 let chanceArea = document.getElementById("chance-area");
+let history = [];
 
 playBtn.addEventListener("click", play)
 resetBtn.addEventListener("click", reset)
@@ -27,6 +28,18 @@ function pickRandomNum() {
 
 function play(){
    let userValue = userInput.value;
+
+    // 유효성 검사
+    if(userValue < 1 || userValue > 100){
+        resultArea.textContent = "1과 100 사이 숫자를 입력해 주세요"
+        return; // 종료
+    }
+
+    if(history.includes(userValue)){
+        resultArea.textContent = "이미 입력한 숫자입니다. 다른 숫자를 입력해 주세요."
+        return;
+    }
+
    // playBtn 누를 때마다 chances가 하나씩 까임
    chances--;
    chanceArea.textContent = `남은 기회: ${chances}번`;
@@ -39,10 +52,11 @@ function play(){
    }else{
         resultArea.textContent = "정답!"
         // 숫자를 맞춘 후로는 더 이상 플레이 못하게
-        // if(gameOver == true){
-        //     playBtn.disabled = true;
-        // }
+            playBtn.disabled = true;
    }
+   // 입력했던 값을 배열에 저장
+   history.push(userValue);
+   console.log(history)
 
    if(chances < 1){
        gameOver = true
@@ -52,16 +66,24 @@ function play(){
    }
 }
 
+function resetInput(){
+    userInput.value = "";
+}
+
 function reset(){
     // user input창이 깨끗하게 정리되고
     userInput.value = "";
     // 새로운 번호가 생성되고
     pickRandomNum();
     resultArea.textContent = "결과"
-}
-
-function resetInput(){
     userInput.value = "";
+    // 다시 게임 플레이 가능
+    gameOver = false;
+    playBtn.disabled = false;
+    chances = 5;
+    chanceArea.textContent = `남은 기회: ${chances}번`;
+    history = [];
 }
 
 pickRandomNum();
+
