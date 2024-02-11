@@ -25,33 +25,33 @@ function pickRandomNum() {
     computerNum = Math.floor(Math.random() * 10)+1;
     console.log("정답", computerNum);
 }
-chanceArea.textContent = `남은 기회: ${chances}번`;
+chanceArea.textContent = `남은 목숨: ${chances}번`;
 
 function play(){
    let userValue = userInput.value;
 
     // 유효성 검사
     if(userValue < 1 || userValue > 10){
-        resultArea.textContent = "1과 10 사이 숫자를 입력해 주세요"
+        resultArea.textContent = "\"1과 10 사이 숫자를 입력하라.\""
         return; // 종료
     }
 
     if(history.includes(userValue)){
-        resultArea.textContent = "이미 입력한 숫자입니다. 다른 숫자를 입력해 주세요."
+        resultArea.textContent = "\"이미 입력한 숫자이다. 다른 숫자를 입력하라.\""
         return;
     }
 
    // playBtn 누를 때마다 chances가 하나씩 까임
    chances--;
-   chanceArea.textContent = `남은 기회: ${chances}번`;
+   chanceArea.textContent = `남은 목숨: ${chances}번`;
    console.log("chance", chances);
 
    if(userValue < computerNum){
-        resultArea.textContent = "Up"
+        resultArea.textContent = "\"위로.\""
    }else if(userValue > computerNum){
-        resultArea.textContent = "Down"
+        resultArea.textContent = "\"아래로.\""
    }else{
-        resultArea.textContent = "정답!"
+        resultArea.textContent = "\"너의 승리이다.\""
         // 숫자를 맞춘 후로는 더 이상 플레이 못하게
             playBtn.disabled = true;
    }
@@ -60,6 +60,7 @@ function play(){
    console.log(history)
 
    if(chances < 1){
+       resultArea.textContent = "\"너의 목숨은 내 것이다.\""
        gameOver = true
    }
    if(gameOver){
@@ -76,13 +77,13 @@ function reset(){
     userInput.value = "";
     // 새로운 번호가 생성되고
     pickRandomNum();
-    resultArea.textContent = "결과"
+    resultArea.textContent = "\"목숨을 걸 준비는 되었는가?\""
     userInput.value = "";
     // 다시 게임 플레이 가능
     gameOver = false;
     playBtn.disabled = false;
     chances = 5;
-    chanceArea.textContent = `남은 기회: ${chances}번`;
+    chanceArea.textContent = `남은 목숨: ${chances}번`;
     history = [];
 }
 

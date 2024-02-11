@@ -15,6 +15,38 @@ body {
     color: chartreuse;
 }
 
+.container{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
 h1{
     font-family: scary;
+    font-size: 4rem;
+}
+
+#user-input{
+    padding: 6px;
+    font-family: bit;
+    border: none;
+    border-radius: 2px;
+}
+
+#user-input:focus{
+    outline: none;
+}
+
+.btn{
+    padding: 6px;
+    font-family: bit;
+    font-size: 0.8rem;
+    background-color: chartreuse;
+    border: none;
+    border-radius: 2px;
+}
+
+#result-area{
+    font-size: 2rem;
 }
